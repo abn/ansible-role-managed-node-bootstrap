@@ -1,0 +1,30 @@
+---
+- name: bootstrap system dependencies
+  raw: |
+    { \
+      test -e {{ managed_node_bootstrap_done_file }} \
+      && echo "Node already bootstrapped";
+    } || \
+    { { { \
+      command -v apt-get \
+      && {{ managed_node_bootstrap_cmd_prefix }} apt-get update \
+      && {{ managed_node_bootstrap_cmd_prefix }} apt-get install -y {{ managed_node_packages_debian | join (' ') }}; \
+    } || { \
+      command -v dnf \
+      && {{ managed_node_bootstrap_cmd_prefix }} dnf -y install {{ managed_node_packages_redhat | join (' ') }}; \
+    } || { \
+      command -v yum \
+      && {{ managed_node_bootstrap_cmd_prefix }} yum -y install epel-release \
+      && {{ managed_node_bootstrap_cmd_prefix }} yum -y install {{ managed_node_packages_redhat | join (' ') }}; \
+    } || { \
+      command -v zypper \
+      && {{ managed_node_bootstrap_cmd_prefix }} zypper refresh \
+      && {{ managed_node_bootstrap_cmd_prefix }} zypper install -y {{ managed_node_packages_suse | join (' ') }}; \
+    } || { \
+      command -v apk \
+      && {{ managed_node_bootstrap_cmd_prefix }} apk add --update --no-cache \
+        {{ managed_node_packages_alpine | join (' ') }}; \
+    }; } && {{ managed_node_bootstrap_cmd_prefix }} touch {{ managed_node_bootstrap_done_file }}; }
+  register: boostrap
+  changed_when: boostrap.stdout.find('Node already bootstrapped') == -1
+  failed_when: boostrap.rc != 0

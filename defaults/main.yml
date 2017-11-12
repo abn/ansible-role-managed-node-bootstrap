@@ -1,0 +1,37 @@
+---
+managed_node_bootstrap_use_sudo: no
+managed_node_bootstrap_cmd_prefix: "{% if managed_node_bootstrap_use_sudo %}sudo{% endif %}"
+managed_node_bootstrap_done_file: /var/run/ansible-node-boostrap.done
+
+managed_node_packages_alpine:
+  - bash
+  - ca-certificates
+  - python2
+  - py2-simplejson
+  - shadow
+  - sudo
+
+managed_node_packages_redhat:
+  - bash
+  - ca-certificates
+  - python2
+  - python2-simplejson
+  - shadow-utils
+  - sudo
+
+managed_node_packages_suse:
+  - bash
+  - ca-certificates
+  - python
+  - python-simplejson
+  - python-xml
+  - shadow
+  - sudo
+
+managed_node_packages_debian:
+  - bash
+  - ca-certificates
+  - python
+  - python-simplejson
+  - passwd
+  - sudo

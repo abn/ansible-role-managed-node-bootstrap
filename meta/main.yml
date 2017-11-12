@@ -1,0 +1,17 @@
+dependencies: []
+
+galaxy_info:
+  author: "Arun Neelicattu"
+  description: "Bootstrap an ansible managed node with minimal dependencies"
+  issue_tracker_url: https://github.com/abn/ansible-role-managed-node-bootstrap/issues
+  license: Apache
+  min_ansible_version: 2.0
+  platforms:
+    - name: Alpine
+    - name: Debian
+    - name: EL
+    - name: Fedora
+    - name: opensuse
+  galaxy_tags:
+    - ansible:managed:node
+    - bootstrap
