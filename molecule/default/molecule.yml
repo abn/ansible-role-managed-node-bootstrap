@@ -7,13 +7,13 @@ lint:
   name: yamllint
   enabled: False
 platforms:
-  - name: molecule-instance-bamboo-elastic-agent-centos
+  - name: molecule-instance-managed-node-centos
     image: centos:latest
-  - name: molecule-instance-bamboo-elastic-agent-opensuse
+  - name: molecule-instance-managed-node-opensuse
     image: opensuse:latest
-  - name: molecule-instance-bamboo-elastic-agent-ubuntu
+  - name: molecule-instance-managed-node-ubuntu
     image: ubuntu:latest
-  - name: molecule-instance-bamboo-elastic-agent-alpine
+  - name: molecule-instance-managed-node-alpine
     image: alpine:latest
     command: 'sh -c "while sleep 3600; do :; done"'
 provisioner:
