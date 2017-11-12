@@ -1,0 +1,6 @@
+---
+- name: converge
+  hosts: all
+  gather_facts: False
+  roles:
+    - ansible-role-managed-node-bootstrap

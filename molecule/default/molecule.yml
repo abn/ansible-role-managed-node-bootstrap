@@ -1,0 +1,32 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+  enabled: False
+platforms:
+  - name: molecule-instance-bamboo-elastic-agent-centos
+    image: centos:latest
+  - name: molecule-instance-bamboo-elastic-agent-opensuse
+    image: opensuse:latest
+  - name: molecule-instance-bamboo-elastic-agent-ubuntu
+    image: ubuntu:latest
+  - name: molecule-instance-bamboo-elastic-agent-alpine
+    image: alpine:latest
+    command: 'sh -c "while sleep 3600; do :; done"'
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../resources/playbooks/docker/create.yml
+    prepare: prepare.yml
+    destroy: ../resources/playbooks/docker/destroy.yml
+  lint:
+    name: ansible-lint
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
