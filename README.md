@@ -1,5 +1,6 @@
 Managed Node Bootstrap
 ======================
+[![Build Status](https://travis-ci.org/abn/ansible-role-managed-node-bootstrap.svg?branch=master)](https://travis-ci.org/abn/ansible-role-managed-node-bootstrap) [![Ansible Role](https://img.shields.io/ansible/role/21884.svg)](https://galaxy.ansible.com/abn/managed-node-bootstrap/)
 
 Bootstrap an ansible managed node with minimal dependencies. This was originally written to bootstrap instances of distribution base docker images, and hence might require improvements before it becomes stable for non container usage.
 
@@ -32,7 +33,7 @@ No Dependencies rquired other than Ansible itself.
 Example Playbook
 ----------------
 
-Here is an example play that can be used to bootstrap all your hosts in your inventory. Note that ansible connection method etc. has to be configured external to this. Additionally, note that this requires connecting as a root user, since we assume `sudo` is not available on these instances (docker image assumption). See above for how to alter this behavior.
+Here is an example play that can be used to bootstrap all your hosts in your inventory. Note that ansible connection method etc. has to be configured external to this. Additionally, note that this requires connecting as a root user, since we assume `sudo` is not available on these instances (docker image assumption). See above for how to alter this behaviour.
 
     ---
     - name: bootstrap ansible managed node
@@ -40,6 +41,28 @@ Here is an example play that can be used to bootstrap all your hosts in your inv
       gather_facts: False
       roles:
         - abn.molecule-node-bootstrap
+
+Testing
+-------
+### Local Environment
+This role uses [Molecule](https://molecule.readthedocs.io/en/latest/) and docker instances to enable testing. You can run this locally on your development environment provided you have python installed and are running the docker daemon.
+
+```sh
+# install molecule and docker-py requirements
+pip install -r test-requirements.txt
+molecule test
+```
+
+This will as configured in the default molecule scenario, spin up containers of the supported distributions and execute a sample playbook.
+
+### Tox
+This project also has [tox](http://tox.readthedocs.io/en/latest/) configured to run against multiple ansible versions with [Molecule](https://molecule.readthedocs.io/en/latest/). This can simply be run using tox.
+
+```sh
+tox
+```
+
+Refer to the [Molecule documentation](https://molecule.readthedocs.io/en/latest/testing.html) and [tox documentation](http://tox.readthedocs.io/en/latest/) for advance usage instructions.
 
 
 License
