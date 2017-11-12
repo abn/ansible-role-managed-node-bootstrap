@@ -44,6 +44,11 @@ Here is an example play that can be used to bootstrap all your hosts in your inv
 
 Testing
 -------
+Before testing, you need to ensure that the submodules required have been cloned.
+```sh
+git submodule update --init --recursive
+```
+
 ### Local Environment
 This role uses [Molecule](https://molecule.readthedocs.io/en/latest/) and docker instances to enable testing. You can run this locally on your development environment provided you have python installed and are running the docker daemon.
 
